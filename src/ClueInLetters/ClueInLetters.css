@@ -69,8 +69,71 @@
   cursor: grabbing; /* Change cursor when dragging */
 }
 
+/* Speed Control Sidebar */
+.speed-control {
+  position: absolute;
+  top: 25px;
+  left: 10px;
+  width: 10px; /* Fixed width for sidebar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #5a5045; /* Match theme */
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.speed-label {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.speed-slider {
+  width: 50px; /* Make the slider vertical */
+  height: 100%;
+  writing-mode: bt-lr; /* Flip the slider vertically */
+  transform: rotate(270deg); /* Rotate for vertical alignment */
+  appearance: none;
+  background-color: #f0ebeb;
+  outline: none;
+  border-radius: 5px;
+  margin: 10px 10px;
+}
+
+.speed-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: #5a5045;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+/* Adjust the scrolling text to leave space for the sidebar */
+.text-scroll {
+  position: relative;
+  margin-left: 30px; /* Leave space for the sidebar */
+  padding: 20px;
+  padding-top: 30px;
+  resize: both;
+  overflow: hidden;
+  border: 2px solid #b8a894;
+  background-image: url('news_back.jpg');
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+
 /* Scrolling Text */
 .scrolling-text {
+  margin-left: 30px; 
   font-size: 1.6rem;
   line-height: 1.8;
   white-space: pre-wrap;
@@ -159,6 +222,8 @@
 
 /* Script Runner Section */
 .script-runner button {
+  top: 800px; 
+  left: 100px; 
   padding: 10px 20px;
   font-size: 1rem;
   font-weight: bold;
@@ -172,12 +237,12 @@
 }
 
 .script-runner button:hover {
-  background-color: #8b7765; /* Lighter shade for hover effect */
+  background-color: #fabd4cfa; /* Lighter shade for hover effect */
 }
 
 .script-output {
   margin-top: 15px;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   color: #333;
   text-align: center;
 }
@@ -188,3 +253,86 @@
   color: red;
   text-align: center;
 }
+
+/* Upload & Reset Box */
+.upload-reset-box {
+  resize: both; /* Allow resizing */
+  overflow: hidden; /* Prevent scrollbars */
+  position: absolute;
+  border: 2px solid #b8a894; /* Match existing borders */
+  background-color: #f4ecd8; /* Match the theme */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow */
+  border-radius: 8px; /* Rounded corners */
+  z-index: 1000; /* Ensure it appears on top */
+}
+
+.upload-reset-box .draggable-header {
+  width: 100%;
+  height: 20px;
+  background-color: #5a5045; /* Dark header */
+  color: white;
+  text-align: center;
+  line-height: 20px;
+  cursor: grab;
+  user-select: none;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.upload-reset-box .draggable-header:active {
+  cursor: grabbing;
+}
+
+.box-content {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 20px); /* Exclude the draggable header */
+}
+
+.file-upload-input {
+  top: 800px; /* Adjust this value to move the box vertically */
+  left: 100px; /* Adjust this value to move the box horizontally */
+  width: 80%; /* Box width */
+  height : 20%; /* Box height */
+  margin-bottom: 10px;
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #f4ecd8;
+  color: black;
+  border: none;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-input:hover {
+  background-color: #fabd4cfa;
+}
+
+.reset-button {
+  top: 1200px; /* Adjust this value to move the box vertically */
+  left: 100px; /* Adjust this value to move the box horizontally */
+  width: 80%; /* Box width */
+  height : 20%; /* Box height */
+  margin-bottom: 10px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  background-color: #f4ecd8; /* Red button */
+  color: black;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #fabd4cfa;
+}
+
+
