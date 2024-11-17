@@ -1,0 +1,190 @@
+/* General Styles */
+@font-face {
+  font-family: 'NanumPenScript-Regular'; /* Example font */
+  src: url('./NanumPenScript-Regular.ttf') format('truetype');
+}
+
+.custom-text {
+  font-family: 'NanumPenScript-Regular', sans-serif; /* Apply custom font */
+}
+
+.clue-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4ecd8; /* Old brown paper background */
+  position: relative;
+}
+
+/* Text Display Box */
+.text-scroll {
+  resize: both; /* Allow resizing */
+  overflow: auto; /* Enable scrolling */
+  position: absolute; /* Allows dragging */
+  padding: 20px;
+  padding-top: 30px;
+  border: 2px solid #b8a894; /* Old brown border */
+  background-image: url('news_back.jpg'); /* Background image */
+  background-size: cover; /* Ensure image covers the box */
+  background-position: center; /* Center the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow for depth */
+}
+
+/* Python Script Runner Box */
+.python-box {
+  resize: both; /* Allow resizing */
+  overflow: hidden; /* Prevent scrollbars for simplicity */
+  position: absolute; /* Position based on drag */
+  padding: 10px;
+  padding-top: 30px;
+  border: 2px solid #b8a894; /* Old brown border */
+  background-image: url('news_back.jpg');
+  background-size: cover; /* Ensure image covers the box */
+  background-position: center; /* Center the image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Draggable Header for Both Boxes */
+.draggable-header {
+  width: 100%;
+  height: 20px;
+  background-color: #5a5045; /* Dark background for visibility */
+  color: white;
+  text-align: center;
+  line-height: 20px; /* Vertically align text */
+  cursor: grab; /* Indicate draggable area */
+  user-select: none; /* Prevent text selection while dragging */
+  position: absolute; /* Ensure the header stays at the top */
+  top: 0; /* Align header to the top of the box */
+  left: 0; /* Ensure it spans the width */
+  z-index: 10; /* Ensure the header is always on top */
+}
+
+.draggable-header:active {
+  cursor: grabbing; /* Change cursor when dragging */
+}
+
+/* Scrolling Text */
+.scrolling-text {
+  font-size: 1.6rem;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  cursor: pointer;
+}
+
+/* Highlighted Word */
+.highlight {
+  background-color: yellow;
+  border: 1px solid black;
+  padding: 2px;
+  font-weight: bold;
+  color: black;
+}
+
+.hover-highlight {
+  display: inline-block;
+  padding: 2px 4px;
+  border: 1px solid transparent;
+  transition: border 0.2s ease;
+  cursor: pointer;
+}
+
+.hover-highlight:hover {
+  border: 1px solid black;
+  background-color: white;
+}
+
+
+/* Word Popup */
+.word-popup {
+  position: absolute;
+  background-color: #fff;
+  color: black;
+  border: 1px solid #333;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Popup Content */
+.popup-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-height: 70%;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.popup-text {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.close-button {
+  display: block;
+  margin: 10px auto;
+  padding: 8px 16px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Script Runner Section */
+.script-runner button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #5a5045;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+.script-runner button:hover {
+  background-color: #8b7765; /* Lighter shade for hover effect */
+}
+
+.script-output {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  color: #333;
+  text-align: center;
+}
+
+.error-message {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: red;
+  text-align: center;
+}

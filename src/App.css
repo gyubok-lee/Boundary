@@ -1,0 +1,116 @@
+/* App.css */
+
+:root {
+  --skyblue: #87ceeb;
+  --stone-ivory: #b8a894; /* Darker shade for a less bright look */
+  --orange-light: #fabd4cfa;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  color: var(--stone-ivory);
+  position: relative;
+}
+
+@font-face {
+  font-family: 'Eulyoo1945-Regular'; /* Name of the font */
+  src: url('C:/Users/Administrator/Desktop/react_pj1/pro1/public/Eulyoo1945-Regular.ttf') format('truetype'); /* Relative path to the font file */
+}
+
+.custom-text2 {
+  font-family: 'Eulyoo1945-Regular', sans-serif; /* Apply the font */
+}
+
+
+/* Overlay styling */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  z-index: 1; /* Ensure it covers everything */
+  pointer-events: none; /* Prevent interaction */
+}
+
+.overlay-text {
+  max-width: 80%;
+  font-weight: bold;
+  line-height: 1.5;
+  font-size: 2.5rem; /* Increased font size for better readability */
+}
+
+/* Sidebar styling */
+.side-bar {
+  width: 300px;
+  background-color: rgba(167, 156, 141, 0.9); /* Darker semi-transparent stone-ivory */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+  z-index: 2; /* Keep sidebar on top of the overlay */
+}
+
+/* Title styling */
+.app-title {
+  font-size: 2.5rem;
+  color: var(--skyblue);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 5px;
+}
+
+/* Subtitle styling */
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--skyblue);
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 5px;
+}
+
+/* Divider line */
+.divider {
+  width: 80%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 20px 0;
+}
+
+/* Navigation links styling */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  align-items: center;
+}
+
+.nav-button {
+  width: 80%;
+  padding: 12px 20px;
+  background-color: var(--skyblue);
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Hover effect */
+.nav-button:hover {
+  background-color: var(--orange-light);
+  transform: translateY(-2px);
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+}
