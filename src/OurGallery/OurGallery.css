@@ -1,0 +1,68 @@
+/* General Styles */
+
+@font-face {
+    font-family: 'Eulyoo1945-Regular'; /* Name of the font */
+    src: url('C:/Users/Administrator/Desktop/react_pj1/pro1/public/Eulyoo1945-Regular.ttf') format('truetype'); /* Relative path to the font file */
+  }
+  
+  .custom-text {
+    font-family: 'NanumPenScript-Regular', sans-serif; /* Apply custom font */
+  }
+  
+
+  .gallery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.upload-box,
+.concept-box,
+.changed-image-box,
+.save-box {
+    margin: 10px 0;
+    text-align: center;
+}
+
+.upload-box input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.preview-image {
+    max-width: 300px;
+    max-height: 300px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.concept-box select {
+    padding: 5px 10px;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.changed-image-box p {
+    font-size: 16px;
+    color: #888;
+}
+
+.save-box button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-box button:hover {
+    background-color: #45a049;
+}

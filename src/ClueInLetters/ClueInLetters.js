@@ -41,9 +41,11 @@ const ClueInLetters = () => {
   // State for Upload & Reset Box
   const [uploadBoxWidth, setUploadBoxWidth] = useState(300);
   const [uploadBoxHeight, setUploadBoxHeight] = useState(200);
-  const [uploadBoxPosition, setUploadBoxPosition] = useState({ top: 500, left: 50 });
+  const [uploadBoxPosition, setUploadBoxPosition] = useState({ top: 600, left: 1100 });
   const isUploadDragging = useRef(false);
   const uploadDragStart = useRef({ x: 0, y: 0 });
+  const fileInputRef = useRef(null); // Reference to the file input
+
 
   // Default text reference for resetting
   const defaultTextRef = useRef('');
@@ -272,6 +274,11 @@ const ClueInLetters = () => {
     setDisplayText(defaultTextRef.current.slice(0, 800));
     setStartIndex(0);
     setIsPaused(false);
+
+    // Clear the file input value
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''; // Reset the file input
+    }
   };
 
   return (
@@ -349,7 +356,7 @@ const ClueInLetters = () => {
         <div className="draggable-header" onMouseDown={handlePythonMouseDown}></div>
         <div className="script-runner custom-text">
           <button onClick={runPythonScript} disabled={isLoading}>
-            {isLoading ? 'Running...' : '한문장으로 요약'}
+            {isLoading ? 'Running...' : '텍스트 요약'}
           </button>
           {isLoading && <p className="loading-message custom-text">Running...</p>}
           {scriptOutput && <p className="script-output custom-text">{scriptOutput}</p>}
@@ -372,6 +379,7 @@ const ClueInLetters = () => {
           <input
             type="file"
             accept=".txt"
+            ref={fileInputRef}
             onChange={handleFileUpload}
             className="file-upload-input"
           />

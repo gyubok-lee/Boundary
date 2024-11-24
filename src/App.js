@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-import ClueInLetters from './ClueInLetters/ClueInLetters';;
+import ClueInLetters from './ClueInLetters/ClueInLetters';
+import OurGallery from './OurGallery/OurGallery';;
 
 const MainPage = () => {
   const [hoverText, setHoverText] = useState('');
@@ -45,28 +46,29 @@ const MainPage = () => {
             onMouseLeave={handleMouseLeave}
             onClick={() => navigate('/clue-in-letters')}
           >
-            The Clue in Letters
+            Library
           </button>
           <button
             className="nav-button custom-text2"
-            onMouseEnter={() => handleMouseEnter('이상현상 찾기')}
+            onMouseEnter={() => handleMouseEnter('엔트로피와 진화')}
             onMouseLeave={handleMouseLeave}
           >
-            The Observer
+            Lab
           </button>
           <button
             className="nav-button custom-text2"
-            onMouseEnter={() => handleMouseEnter('좋아하는 노래를 나만의 노래로')}
+            onMouseEnter={() => handleMouseEnter('사운드의 스펙트럼')}
             onMouseLeave={handleMouseLeave}
           >
-            The Night Was Rain
+            Music Bar
           </button>
           <button
             className="nav-button custom-text2"
             onMouseEnter={() => handleMouseEnter('사진에 화풍을 넣다')}
             onMouseLeave={handleMouseLeave}
+            onClick={() => navigate('/our-gallery')}
           >
-            Our Gallery
+            Gallery
           </button>
         </nav>
       </header>
@@ -79,6 +81,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/clue-in-letters" element={<ClueInLetters />} />
+      <Route path="/our-gallery" element={<OurGallery />} />
     </Routes>
   </Router>
 );
