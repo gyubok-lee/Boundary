@@ -2,17 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import './OurGallery.css';
 
 const imageNames = ['/img1.jpeg', '/img2.jpeg', '/img3.jpeg', '/img4.jpeg', '/img5.jpeg', '/img6.jpeg', '/img7.jpeg'];
+const convertedNames = ['/stylized1.jpg', '/stylized2.jpg', '/stylized3.jpg', '/stylized4.jpg', '/stylized5.jpg', '/stylized6.jpg', '/stylized7.jpg'];
 
 const OurGallery = () => {
-    const [upperHallStyle, setUpperHallStyle] = useState({ top: '10%', left: '25%', rotation: 0 });
-    const [lowerHallStyle, setLowerHallStyle] = useState({ top: '70%', left: '25%', rotation: 0 });
+    const [upperHallStyle, setUpperHallStyle] = useState({ top: '5%', left: '10%', rotation: 0 });
+    const [lowerHallStyle, setLowerHallStyle] = useState({ top: '75%', left: '10%', rotation: 0 });
     const [upperSpeed, setUpperSpeed] = useState(1);
     const [lowerSpeed, setLowerSpeed] = useState(1);
 
     const upperRef = useRef(null);
     const lowerRef = useRef(null);
 
-    const reversedImages = [...imageNames].reverse();
+    const reversedImages = [...convertedNames].reverse();
     const lowerImages = [...reversedImages, ...reversedImages]; // 두 번 반복
 
 
@@ -173,8 +174,7 @@ const OurGallery = () => {
                     className="rotate-boundary boundary-right"
                     onMouseDown={(e) => handleRotateHall(e, 'upper')}
                 >
-                    <span className="rotation-display">{`${Math.round(upperHallStyle.rotation)}°`}</span>
-                </div>
+                    </div>
             </div>
 
             {/* Lower Hall */}
@@ -200,8 +200,7 @@ const OurGallery = () => {
                     className="rotate-boundary boundary-right"
                     onMouseDown={(e) => handleRotateHall(e, 'lower')}
                 >
-                    <span className="rotation-display">{`${Math.round(lowerHallStyle.rotation)}°`}</span>
-                </div>
+                    </div>
             </div>
         </div>
     );

@@ -12,14 +12,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 50%; /* Shorter hall width */
-    height: 150px; /* Adjust height as needed */
+    width: 80%; /* Shorter hall width */
+    height: 200px; /* Adjust height as needed */
     transition: top 0.2s ease, left 0.2s ease, transform 0.2s ease;
 }
 
 .hall {
     flex: 1;
-    background-color: rgba(173, 216, 230, 0.5);
+    background-color: #87ceeb;
     overflow: hidden;
     border-radius: 10px;
 }
@@ -31,8 +31,8 @@
 }
 
 .image-track img {
-    width: 200px;
-    height: 150px;
+    width: 255px;
+    height: 200px;
     margin: 0 5px;
     object-fit: cover;
     border-radius: 5px;
@@ -43,20 +43,6 @@
 .rotate-boundary {
     width: 20px;
     height: 100%;
-    background-color: gold;
+    background-color: #fabd4cd2;
     cursor: pointer;
 }
-
-.rotation-display {
-    position: absolute;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 2px 5px;
-    border-radius: 5px;
-    font-size: 12px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-}
-
