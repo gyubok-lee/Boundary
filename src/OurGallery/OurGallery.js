@@ -5,8 +5,8 @@ const imageNames = ['/img1.jpeg', '/img2.jpeg', '/img3.jpeg', '/img4.jpeg', '/im
 const convertedNames = ['/stylized1.jpg', '/stylized2.jpg', '/stylized3.jpg', '/stylized4.jpg', '/stylized5.jpg', '/stylized6.jpg', '/stylized7.jpg'];
 
 const OurGallery = () => {
-    const [upperHallStyle, setUpperHallStyle] = useState({ top: '5%', left: '10%', rotation: 0 });
-    const [lowerHallStyle, setLowerHallStyle] = useState({ top: '75%', left: '10%', rotation: 0 });
+    const [upperHallStyle, setUpperHallStyle] = useState({ top: '5%', left: '5%', rotation: 0 });
+    const [lowerHallStyle, setLowerHallStyle] = useState({ top: '75%', left: '5%', rotation: 0 });
     const [upperSpeed, setUpperSpeed] = useState(1);
     const [lowerSpeed, setLowerSpeed] = useState(1);
 
@@ -15,6 +15,8 @@ const OurGallery = () => {
     const [transformedImage, setTransformedImage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [showUploadOptions, setShowUploadOptions] = useState(true); // To toggle upload UI visibility
+
 
     const upperRef = useRef(null);
     const lowerRef = useRef(null);
@@ -57,7 +59,7 @@ const OurGallery = () => {
         const upperScrollInterval = setInterval(() => {
             if (upperRef.current) {
                 upperScrollPosition -= upperSpeed;
-                if (Math.abs(upperScrollPosition) >= upperRef.current.scrollWidth / 2) {
+                if (Math.abs(upperScrollPosition) >= upperRef.current.scrollWidth / 2.) {
                     upperScrollPosition = 0;
                 }
                 upperRef.current.style.transform = `translateX(${upperScrollPosition}px)`;
@@ -89,24 +91,27 @@ const OurGallery = () => {
             setErrorMessage('화풍을 선택해주세요.');
             return;
         }
-    
+
+        setShowUploadOptions(false); // Hide upload and style options
+        setTransformedImage(''); // Reset transformed image
+
         const formData = new FormData();
         formData.append('image', uploadedImage);
         formData.append('style', selectedStyle);
-    
+
         setIsLoading(true);
         try {
             const response = await fetch('http://localhost:5000/run-img', {
                 method: 'POST',
                 body: formData,
             });
-    
+
             if (!response.ok) {
                 const errorData = await response.json();
                 setErrorMessage(errorData.error || '변환 실패');
                 return;
             }
-    
+
             // Blob으로 변환된 이미지 처리
             const blob = await response.blob();
             const imageUrl = URL.createObjectURL(blob); // Blob 데이터를 URL로 변환
@@ -116,9 +121,17 @@ const OurGallery = () => {
             setErrorMessage('서버와 통신 중 오류 발생');
         } finally {
             setIsLoading(false);
+            setShowUploadOptions(true); // Restore upload and style options
         }
     };
     
+
+    const downloadImage = () => {
+        const link = document.createElement('a');
+        link.href = transformedImage;
+        link.download = 'transformed-image.jpg';
+        link.click();
+    };
 
     const handleHallDrag = (e, hallType) => {
         const hall = hallType === 'upper' ? upperHallStyle : lowerHallStyle;
@@ -199,31 +212,45 @@ const OurGallery = () => {
             </div>
 
             {/* 중간 박스 */}
-            <div className="middle-boxes">
+            <div className="middle-boxes custom-text2">
                 <div className="left-box">
-                    <h3>이미지 업로드 및 화풍 선택</h3>
-                    <input type="file" accept="image/*" onChange={(e) => setUploadedImage(e.target.files[0])} />
-                    <select value={selectedStyle} onChange={(e) => setSelectedStyle(e.target.value)}>
-                        <option value="">화풍을 선택해주세요</option>
-                        <option value="동양화">동양화</option>
-                        <option value="르네상스">르네상스</option>
-                        <option value="인상주의">인상주의</option>
-                        <option value="추상">추상</option>
-                    </select>
-                    <button onClick={runImageTransform}>화풍 변환</button>
+                    {showUploadOptions ? (
+                        <>
+                            <h3>이미지 업로드 및 화풍 선택</h3>
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={(e) => setUploadedImage(e.target.files[0])}
+                            />
+                            <select
+                                value={selectedStyle}
+                                onChange={(e) => setSelectedStyle(e.target.value)}
+                            >
+                                <option value="">화풍을 선택해주세요</option>
+                                <option value="동양화">동양화</option>
+                                <option value="르네상스">르네상스</option>
+                                <option value="인상주의">인상주의</option>
+                                <option value="추상">추상</option>
+                            </select>
+                            <button onClick={runImageTransform}>작품으로</button>
+                        </>
+                    ) : (
+                        uploadedImage && <img src={URL.createObjectURL(uploadedImage)} alt="Uploaded" />
+                    )}
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </div>
                 <div className="right-box">
-                    <h3>변환된 이미지</h3>
+                    <h3>당신의 그림</h3>
                     {isLoading ? (
                         <p>변환 중입니다...</p>
-                    ) : transformedImage ? (
-                        <div>
-                            <img src={transformedImage} alt="Transformed" />
-                            <button onClick={() => window.open(transformedImage, '_blank')}>다운로드</button>
-                        </div>
                     ) : (
-                        <p>변환된 이미지가 여기에 표시됩니다.</p>
+                        <div className="image-container">
+                            {uploadedImage && <img src={URL.createObjectURL(uploadedImage)} alt="Original" />}
+                            {transformedImage && <img src={transformedImage} alt="Transformed" />}
+                        </div>
+                    )}
+                    {transformedImage && (
+                        <button onClick={downloadImage}>다운로드</button>
                     )}
                 </div>
             </div>

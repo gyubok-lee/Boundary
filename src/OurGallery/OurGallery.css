@@ -1,52 +1,13 @@
-.gallery-container {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    background-color: #f0f0f0;
-    overflow: hidden;
-    user-select: none;
-}
 
-.hall-container {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80%; /* Shorter hall width */
-    height: 200px; /* Adjust height as needed */
-    transition: top 0.2s ease, left 0.2s ease, transform 0.2s ease;
-}
-
-.hall {
-    flex: 1;
-    background-color: #87ceeb;
-    overflow: hidden;
-    border-radius: 10px;
-}
-
-.image-track {
-    display: flex;
-    white-space: nowrap;
-    will-change: transform;
-}
-
-.image-track img {
-    width: 255px;
-    height: 200px;
-    margin: 0 5px;
-    object-fit: cover;
-    border-radius: 5px;
-    pointer-events: none; /* Disable interactions with images */
-}
-
-
-.rotate-boundary {
-    width: 20px;
-    height: 100%;
-    background-color: #fabd4cd2;
-    cursor: pointer;
-}
-
+@font-face {
+    font-family: 'Eulyoo1945-Regular'; /* Name of the font */
+    src: url('C:/Users/Administrator/Desktop/react_pj1/pro1/public/Eulyoo1945-Regular.ttf') format('truetype'); /* Relative path to the font file */
+  }
+  
+  .custom-text2 {
+    font-family: 'Eulyoo1945-Regular', sans-serif; /* Apply the font */
+  }
+  
 
 /* 중간 박스 추가 스타일 */
 .middle-boxes {
@@ -56,12 +17,25 @@
     transform: translate(-50%, -50%);
     display: flex;
     justify-content: space-between;
-    width: 80%; /* 중간 박스 너비 */
+    width: 90%; /* 중간 박스 너비 */
+    height: 400px;
     padding: 20px;
     gap: 20px;
 }
 
-.left-box, .right-box {
+.right-box {
+    width : 50%;
+    display: flex; /* Flexbox로 자식 요소 배치 */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.left-box  {
     flex: 1;
     padding: 20px;
     background: #ffffff;
@@ -69,17 +43,19 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
 .left-box h3, .right-box h3 {
     font-size: 18px;
     margin-bottom: 15px;
     color: #333;
 }
 
+
 .left-box input, .left-box select, .left-box button {
     display: block;
-    margin: 10px 0;
+    margin: 10 px 0;
     padding: 10px;
-    width: 100%;
+    width: 90%;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
@@ -102,17 +78,24 @@
     margin-top: 10px;
 }
 
-.right-box img {
-    width: 100%;
-    max-height: 300px;
-    object-fit: contain;
-    border-radius: 10px;
-    margin-bottom: 15px;
+.image-container {
+    display: flex; /* 기존 이미지와 변환된 이미지를 가로로 배치 */
+    gap: 100px; /* 이미지 간격 */
+    width: 100%; /* 박스 너비에 맞게 */
+    justify-content: center; /* 가운데 정렬 */
+    overflow: hidden; /* 이미지가 박스를 벗어나지 않도록 */
+}
+
+.image-container img {
+    max-width: 100%; /* 이미지가 박스의 절반씩 차지 */
+    max-height: 80%;
+    object-fit: contain; /* 이미지 비율 유지 */
+    border-radius: 10px; /* 이미지 테두리 둥글게 */
 }
 
 .right-box button {
     display: block;
-    width: 100%;
+    width: 70%;
     padding: 10px;
     background-color: #28a745;
     color: white;
@@ -126,3 +109,54 @@
 .right-box button:hover {
     background-color: #218838;
 }
+
+
+.gallery-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-color: #f0f0f0;
+    overflow: hidden;
+    user-select: none;
+}
+
+.hall-container {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%; /* Shorter hall width */
+    height: 200px; /* Adjust height as needed */
+    transition: top 0.2s ease, left 0.2s ease, transform 0.2s ease;
+}
+
+.hall {
+    flex: 1;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.image-track {
+    display: flex;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.image-track img {
+    width: 280px;
+    height: 200px;
+    margin: 0 5px;
+    object-fit: cover;
+    border-radius: 5px;
+    pointer-events: none; /* Disable interactions with images */
+}
+
+
+.rotate-boundary {
+    width: 20px;
+    height: 100%;
+    background-color: #fabd4cd2;
+    cursor: pointer;
+}
+

@@ -97,7 +97,7 @@ def image_tran (content_image, concept) :
         if max_dim == 256 :
             img = tf.image.resize(img, (max_dim, max_dim))
         else :
-            #img = tf.image.rot90(img, k=3)  # k=1: 90도 회전
+            img = tf.image.rot90(img, k=3)  # k=1: 90도 회전
             img = tf.image.resize(img, (max_dim, max_dim))  # Convert to tensor
         img = img[tf.newaxis, :]
         return img / 255.0  # Normalize
@@ -123,16 +123,16 @@ def image_tran (content_image, concept) :
     style_image2 = load_image(f'./{concept}2.jpg', max_dim=256)  # 스타일 이미지 경로 (예: 동양화)
     style_image3 = load_image(f'./{concept}3.jpg', max_dim=256)  # 스타일 이미지 경로 (예: 동양화)
 
-    style_image1 ,style_image2, style_image3 = (style_image1*0.2 + style_image2*0.4 + style_image3*0.4,
-                                                style_image1*0.4 + style_image2*0.2 + style_image3*0.4,
-                                                style_image1*0.4 + style_image2*0.4 + style_image3*0.2)
+    style_image1 ,style_image2, style_image3 = (style_image1*0.6 + style_image2*0.2 + style_image3*0.2,
+                                                style_image1*0.2 + style_image2*0.6 + style_image3*0.2,
+                                                style_image1*0.2 + style_image2*0.2 + style_image3*0.6)
 
     # 스타일 전이 실행
     stylized_image1  = hub_model(tf.constant(content_image), tf.constant(style_image1))[0]
     stylized_image2  = hub_model(tf.constant(content_image), tf.constant(style_image2))[0]
     stylized_image3  = hub_model(tf.constant(content_image), tf.constant(style_image3))[0]
     
-    stylized_image = stylized_image1*0.33 + stylized_image2*0.33 + stylized_image3*0.33  + content_image*0.01
+    stylized_image = stylized_image1*0.333 + stylized_image2*0.333 + stylized_image3*0.333  + content_image*0.001
     
     return postprocess_image(stylized_image)
 
