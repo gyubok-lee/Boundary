@@ -97,7 +97,7 @@ def image_tran (content_image, concept) :
         if max_dim == 256 :
             img = tf.image.resize(img, (max_dim, max_dim))
         else :
-            img = tf.image.rot90(img, k=3)  # k=1: 90도 회전
+            #img = tf.image.rot90(img, k=3)  # k=1: 90도 회전
             img = tf.image.resize(img, (max_dim, max_dim))  # Convert to tensor
         img = img[tf.newaxis, :]
         return img / 255.0  # Normalize

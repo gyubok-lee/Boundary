@@ -240,7 +240,7 @@ const OurGallery = () => {
                     {errorMessage && <p className="error-message">{errorMessage}</p>}
                 </div>
                 <div className="right-box">
-                    <h3>당신의 그림</h3>
+                    <h3>변환된 이미지</h3>
                     {isLoading ? (
                         <p>변환 중입니다...</p>
                     ) : (
