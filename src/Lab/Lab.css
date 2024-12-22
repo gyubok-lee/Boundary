@@ -1,0 +1,127 @@
+
+@font-face {
+    font-family: 'Eulyoo1945-Regular'; /* Name of the font */
+    src: url('C:/Users/Administrator/Desktop/react_pj1/pro1/public/Eulyoo1945-Regular.ttf') format('truetype'); /* Relative path to the font file */
+  }
+  
+  .custom-text2 {
+    font-family: 'Eulyoo1945-Regular', sans-serif; /* Apply the font */
+  }
+  
+
+.lab-container {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #2d3748, #4a5568);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .lab-title {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  
+  .lab-box {
+    position: relative;
+    background: #2d3748;
+    border: 2px solid #4a5568;
+    border-radius: 8px;
+    width: 400px;
+    height: 400px;
+    perspective: 1000px;
+    overflow: hidden;
+  }
+  
+  .lab-point {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .lab-point-latest {
+    box-shadow: 0 0 0 2px orange; /* 검은색 테두리 */
+  }
+  
+  .lab-popup {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    transform: translate(-50%, -150%);
+    white-space: nowrap; /* 팝업 텍스트가 줄바꿈되지 않도록 설정 */
+  }
+  
+  .lab-axes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .lab-axis-x {
+    stroke: red;
+    stroke-width: 2;
+    stroke-opacity: 0.5;
+    stroke-dasharray: 4;
+  }
+  
+  .lab-axis-y {
+    stroke: green;
+    stroke-width: 2;
+    stroke-opacity: 0.5;
+    stroke-dasharray: 4;
+  }
+  
+  .lab-axis-z {
+    stroke: blue;
+    stroke-width: 2;
+    stroke-opacity: 0.5;
+    stroke-dasharray: 4;
+  }
+  
+  
+  .lab-buttons {
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+  }
+  
+  .lab-button {
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .lab-button.add {
+    background-color: #48bb78;
+  }
+  
+  .lab-button.shake {
+    background-color: #4299e1;
+  }
+  
+  .lab-button:disabled {
+    background-color: #718096;
+    cursor: not-allowed;
+  }
+  
+  .lab-error {
+    color: #e53e3e;
+    margin-top: 16px;
+  }
+  

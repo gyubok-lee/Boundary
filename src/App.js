@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import ClueInLetters from './ClueInLetters/ClueInLetters';
-import OurGallery from './OurGallery/OurGallery';;
+import OurGallery from './OurGallery/OurGallery';
+import Lab from './Lab/Lab';
 
 const MainPage = () => {
   const [hoverText, setHoverText] = useState('');
@@ -52,6 +53,7 @@ const MainPage = () => {
             className="nav-button custom-text2"
             onMouseEnter={() => handleMouseEnter('엔트로피와 진화')}
             onMouseLeave={handleMouseLeave}
+            onClick={() => navigate('/lab')}
           >
             Lab
           </button>
@@ -82,6 +84,7 @@ const App = () => (
       <Route path="/" element={<MainPage />} />
       <Route path="/clue-in-letters" element={<ClueInLetters />} />
       <Route path="/our-gallery" element={<OurGallery />} />
+      <Route path="/lab" element={<Lab />} />
     </Routes>
   </Router>
 );

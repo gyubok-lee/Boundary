@@ -11,6 +11,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import networkx as nx
 from langdetect import detect
+import random
 
 from transformers import pipeline
 from googletrans import Translator
@@ -177,6 +178,34 @@ def run_img():
         return send_file(buffer,mimetype='image/jpeg',as_attachment=False)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+# 점 데이터 저장
+points = [{"x": random.uniform(-5, 5), "y": random.uniform(-5, 5), "z": random.uniform(-5, 5)} for _ in range(30)]
+    
+@app.route("/get-points", methods=["GET"])
+def get_points():
+    """기본 점 반환"""
+    global points
+    points = [{"x": random.uniform(-5, 5), "y": random.uniform(-5, 5), "z": random.uniform(-5, 5)} for _ in range(30)]
+    return jsonify(points)
+
+@app.route("/add-point", methods=["POST"])
+def add_point():
+    """새로운 점 추가"""
+    global points
+    if len(points) >= 100:
+        return jsonify({"error": "점 개수가 최대치에 도달했습니다."}), 400
+
+    new_point = {"x": random.uniform(-5, 5), "y": random.uniform(-5, 5), "z": random.uniform(-5, 5)}
+    points.append(new_point)
+    return jsonify(points)
+
+@app.route("/shake-points", methods=["POST"])
+def shake_points():
+    """모든 점의 좌표를 무작위로 변경"""
+    global points
+    points = [{"x": random.uniform(-5, 5), "y": random.uniform(-5, 5), "z": random.uniform(-5, 5)} for _ in points]
+    return jsonify(points)
     
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
