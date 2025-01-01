@@ -9,16 +9,24 @@
   }
   
 
-.lab-container {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(to bottom right, #2d3748, #4a5568);
+  .lab-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: linear-gradient(to bottom right, #2d3748, #4a5568);
+    width: 100vw;
+    height: 100vh;
   }
   
+  .lab-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 50%;
+    height: 70vh;
+  }
+
   .lab-title {
     color: white;
     font-size: 24px;
@@ -27,25 +35,21 @@
   
   .lab-box {
     position: relative;
+    width: 600px; /* 고정된 너비 */
+    height: 600px; /* 고정된 높이 */
     background: #2d3748;
     border: 2px solid #4a5568;
     border-radius: 8px;
-    width: 400px;
-    height: 400px;
-    perspective: 1000px;
     overflow: hidden;
   }
   
+  
   .lab-point {
     position: absolute;
-    background: white;
-    border-radius: 50%;
     width: 10px;
     height: 10px;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   
   
@@ -115,6 +119,10 @@
     background-color: #4299e1;
   }
   
+  .lab-button.cluster {
+    background-color: #fabd4cd2;
+  }
+
   .lab-button:disabled {
     background-color: #718096;
     cursor: not-allowed;
@@ -125,3 +133,43 @@
     margin-top: 16px;
   }
   
+  .lab-cluster-center {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 2px solid;
+    border-radius: 50%;
+    background: transparent;
+  }
+  
+  .lab-point-selected {
+    box-shadow: 0 0 5px 2px orange;
+  }
+  
+  .lab-history {
+    width: 25%;
+    height: 85%;
+    overflow-y: auto;
+    padding: 16px;
+    background: #1a202c;
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .lab-history h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .lab-history p {
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 4px 0;
+  }
+  
+  .lab-buttons {
+    margin-top: 16px;
+    display: flex;
+    gap: 16px;
+  }

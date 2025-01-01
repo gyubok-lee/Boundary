@@ -51,7 +51,7 @@ const MainPage = () => {
           </button>
           <button
             className="nav-button custom-text2"
-            onMouseEnter={() => handleMouseEnter('엔트로피와 진화')}
+            onMouseEnter={() => handleMouseEnter('무작위와 질서')}
             onMouseLeave={handleMouseLeave}
             onClick={() => navigate('/lab')}
           >

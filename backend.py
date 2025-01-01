@@ -18,6 +18,7 @@ from googletrans import Translator
 from transformers import pipeline
 from googletrans import Translator
 from nltk.corpus import stopwords
+from sklearn.cluster import DBSCAN
 
 import tensorflow as tf
 import tensorflow_hub as hub
@@ -206,6 +207,33 @@ def shake_points():
     global points
     points = [{"x": random.uniform(-5, 5), "y": random.uniform(-5, 5), "z": random.uniform(-5, 5)} for _ in points]
     return jsonify(points)
-    
+
+@app.route("/cluster-points", methods=["POST"])
+def cluster_points():
+    if not points:
+        return jsonify({"error": "점 데이터가 없습니다."}), 400
+
+    data = np.array([[p["x"], p["y"], p["z"]] for p in points])
+    dbscan = DBSCAN(eps=2.75, min_samples=3).fit(data)
+    labels = dbscan.labels_
+
+    # 군집 번호를 조정
+    adjusted_labels = [label if label >= 0 and label < 3 else 3 for label in labels]
+
+    # 점 데이터에 군집 정보 추가
+    for i, point in enumerate(points):
+        point["cluster"] = int(adjusted_labels[i])
+
+    # 중심점 계산 (각 군집의 평균 좌표)
+    unique_clusters = set(adjusted_labels) - {-1}  # -1은 노이즈 처리, 제외
+    clusters = []
+    for cluster_id in unique_clusters:
+        cluster_points = data[np.array(adjusted_labels) == cluster_id]
+        if len(cluster_points) > 0 and cluster_id != 3:
+            center = cluster_points.mean(axis=0)
+            clusters.append({"x": float(center[0]), "y": float(center[1]), "z": float(center[2])})
+
+    return jsonify({"points": points, "clusters": clusters})
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
