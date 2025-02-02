@@ -25,6 +25,8 @@ import tensorflow_hub as hub
 import matplotlib.pyplot as plt
 from PIL import Image
 
+import librosa
+import soundfile as sf
 
 # 추출적 요약
 def extractive_summary(text, num_sentences=1):
@@ -234,6 +236,57 @@ def cluster_points():
             clusters.append({"x": float(center[0]), "y": float(center[1]), "z": float(center[2])})
 
     return jsonify({"points": points, "clusters": clusters})
+
+
+@app.route("/music-trans", methods=["POST"])
+def music_trans():
+    # 업로드된 파일 가져오기
+    source_file = request.files['source']
+    style_file = request.files['style']
+
+    # 임시 파일로 저장
+    source_path = "source_temp.wav"
+    style_path = "style_temp.wav"
+    output_path = "transformed_audio.wav"
+
+    source_file.save(source_path)
+    style_file.save(style_path)
+    
+    # 오디오 파일 로드
+    audio1, sr = librosa.load(source_path, sr=None)
+    audio2, _ = librosa.load(style_path, sr=sr)
+
+    n_fft = 2048
+    hop_length = 256
+
+    # STFT 변환
+    D1 = librosa.stft(audio1, n_fft=n_fft, hop_length=hop_length)
+    D2 = librosa.stft(audio2, n_fft=n_fft, hop_length=hop_length)
+
+    # 주파수별 에너지 비율 계산
+    avg_spec1 = np.mean(np.abs(D1), axis=1)
+    avg_spec2 = np.mean(np.abs(D2), axis=1)
+    ratio = avg_spec2 / (avg_spec1 + 1e-6)  # 0으로 나누는 문제 방지
+    
+    # 첫번째 음원의 STFT에 필터 적용하기 (지수 인자를 활용)
+    alpha = 1
+
+    D1_modified = D1.copy()
+    for i in range(D1.shape[0]):
+        D1_modified[i, :] *= ratio[i] ** alpha
+
+    # ISTFT 변환하여 시간 도메인 신호로 복원
+    audio1_modified = librosa.istft(D1_modified, hop_length=hop_length)
+    output_path = 'ai_audio.wav'
+    sf.write(output_path, audio1_modified, sr)  # 수정된 오디오 저장
+
+    # 변환된 파일 전송
+    return send_file(output_path, mimetype="audio/wav", as_attachment=True, attachment_filename="ai_audio.wav")
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

@@ -5,6 +5,7 @@ import './App.css';
 import ClueInLetters from './ClueInLetters/ClueInLetters';
 import OurGallery from './OurGallery/OurGallery';
 import Lab from './Lab/Lab';
+import MusicBar from './MusicBar/MusicBar';
 
 const MainPage = () => {
   const [hoverText, setHoverText] = useState('');
@@ -61,6 +62,7 @@ const MainPage = () => {
             className="nav-button custom-text2"
             onMouseEnter={() => handleMouseEnter('사운드의 스펙트럼')}
             onMouseLeave={handleMouseLeave}
+            onClick={() => navigate('/music-bar')}
           >
             Music Bar
           </button>
@@ -77,7 +79,6 @@ const MainPage = () => {
     </div>
   );
 };
-
 const App = () => (
   <Router>
     <Routes>
@@ -85,6 +86,7 @@ const App = () => (
       <Route path="/clue-in-letters" element={<ClueInLetters />} />
       <Route path="/our-gallery" element={<OurGallery />} />
       <Route path="/lab" element={<Lab />} />
+      <Route path="/music-bar" element={<MusicBar />} />
     </Routes>
   </Router>
 );
